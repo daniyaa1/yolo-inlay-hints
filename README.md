@@ -8,7 +8,9 @@ Designed for high-performance environments, the extension ensures **zero-latency
 
 ---
 
-# 🎥 Visual Demo
+## 🎥 Visual Demo
+
+![YOLO Inlay Hints Demo](demo.gif)
 
 *(Add a GIF or screenshot here once available)*
 
