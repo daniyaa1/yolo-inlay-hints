@@ -1,1 +1,211 @@
-🏷️ YOLO Inlay HintsYOLO Inlay Hints is a professional-grade visualization and productivity tool for VS Code, specifically engineered for the Computer Vision annotation workflow. It bridges the gap between raw ML data (Class IDs) and human context, ensuring zero-latency data validation and navigation in complex, multi-folder annotation projects.🎥 Visual Demo🚀 Key Features (Data Lifecycle Support)Contextual Labeling: Instantly maps cryptic Class IDs (e.g., 0) to human-readable names ([person]). hints appear dynamically within valid YOLO files.Intelligent File Discovery: Automatically locates your mapping file (classes.txt) by searching upward from the document or performing a parallel, workspace-wide scan.Jump-to-Definition (Navigation Provider): Hold Cmd (Mac) or Ctrl (Windows) and Click a Class ID to immediately open the mapping file at the exact line of that definition.Contextual Hover & Metadata: Hover over a hint to see full class metadata, including the Validated Source Path, confirming which mapping file is currently active.Dataset Validation: Displays a Warning Inlay Hint if a Class ID is missing from your mapping file, acting as a real-time debugging tool for annotation integrity.🛠️ Technical Architecture (Senior Engineering Patterns)This extension implements a robust, event-driven architecture designed to work in standard professional DevOps environments:Cross-Platform FileSystem API: Fully engineered with the VS Code URI-based API (vscode.workspace.fs), ensuring seamless performance in local, Remote-SSH (Azure/AWS), and Docker Container (WSL/Codespaces) development.Race-Condition Mitigation: Utilizes Cancellation Tokens to honor VS Code's request to abort background tasks, preventing UI lag or flickering during rapid scrolling or file switching.Asynchronous Disk I/O Caching: Implements a Map-based caching layer to store file content, significantly reducing disk reads and ensuring a zero-latency editor experience.Content-Based Content Validation: Includes a built-in YOLO schema check, ensuring hints only activate in files matching the YOLO 5-column numeric format (ClassID X Y W H).⚙️ ConfigurationSettingDefaultDescriptionyoloInlayHints.enabledtrueGlobally enable or disable all inlay hints.yoloInlayHints.mappingFileNameclasses.txtSupports non-standard mapping names (e.g., labels.txt or obj.names).yoloInlayHints.showUnlabeledWarningtrueToggles the visual "Warning" hints for missing class IDs.📦 Installation & UsageInstall via the VS Code Marketplace.Open any folder containing YOLO annotations and a classes.txt (or custom defined) mapping file.Hints will appear automatically in .txt files that match the YOLO format.Use Hover to check source metadata; use Cmd+Click for definition navigation.
+# 🏷️ YOLO Inlay Hints
+
+**YOLO Inlay Hints** is a professional-grade visualization and productivity extension for VS Code, specifically engineered for the **Computer Vision annotation workflow**.
+
+It bridges the gap between raw ML annotation data (**Class IDs**) and human-readable context, enabling **instant validation, navigation, and debugging** within complex annotation datasets.
+
+Designed for high-performance environments, the extension ensures **zero-latency feedback** while working with large multi-folder YOLO datasets.
+
+---
+
+# 🎥 Visual Demo
+
+*(Add a GIF or screenshot here once available)*
+
+Example:
+
+```
+0 0.512 0.433 0.231 0.123
+```
+
+Becomes:
+
+```
+0 [person] 0.512 0.433 0.231 0.123
+```
+
+---
+
+# 🚀 Key Features
+
+## Contextual Labeling
+Instantly maps cryptic **Class IDs** (e.g., `0`) to human-readable labels like:
+
+```
+0 → [person]
+```
+
+Hints appear dynamically within valid YOLO annotation files.
+
+---
+
+## Intelligent File Discovery
+
+The extension automatically locates your mapping file (`classes.txt`) by:
+
+- Searching upward from the current document
+- Performing a workspace-wide parallel scan if necessary
+
+This allows flexible dataset structures without manual configuration.
+
+---
+
+## Jump-to-Definition (Navigation Provider)
+
+Hold:
+
+- **Cmd + Click** (Mac)
+- **Ctrl + Click** (Windows / Linux)
+
+on a Class ID to immediately open the **mapping file** at the exact definition line.
+
+---
+
+## Contextual Hover & Metadata
+
+Hover over any inlay hint to view metadata including:
+
+- Class label
+- Source mapping file
+- Full path of the active mapping file
+
+This helps confirm which dataset configuration is currently active.
+
+---
+
+## Dataset Validation
+
+If a **Class ID is missing from the mapping file**, the extension shows a **Warning Inlay Hint**, allowing instant debugging of annotation integrity.
+
+Example:
+
+```
+⚠ Unknown Class ID
+```
+
+---
+
+# 🛠️ Technical Architecture
+
+This extension implements **robust, production-grade engineering patterns** suitable for professional ML pipelines.
+
+## Cross-Platform File System API
+
+Uses the **VS Code URI-based filesystem API** (`vscode.workspace.fs`) enabling compatibility with:
+
+- Local environments
+- Remote SSH development
+- Cloud VMs (Azure / AWS)
+- Docker containers
+- WSL
+- GitHub Codespaces
+
+---
+
+## Race Condition Mitigation
+
+Implements **Cancellation Tokens** to safely cancel background tasks when VS Code requests termination.
+
+This prevents:
+
+- UI lag
+- flickering hints
+- unnecessary CPU usage during rapid scrolling or file switching
+
+---
+
+## Asynchronous Disk I/O Caching
+
+A **Map-based caching layer** stores file contents in memory, reducing disk reads and ensuring **zero-latency editor interaction**.
+
+---
+
+## Content-Based Validation
+
+A built-in schema validator ensures hints activate **only in valid YOLO annotation files**.
+
+Required format:
+
+```
+ClassID X Y Width Height
+```
+
+Example:
+
+```
+0 0.521 0.433 0.212 0.123
+```
+
+---
+
+# ⚙️ Extension Configuration
+
+| Setting | Default | Description |
+|-------|-------|-------------|
+| `yoloInlayHints.enabled` | `true` | Enable or disable all inlay hints |
+| `yoloInlayHints.mappingFileName` | `classes.txt` | Supports custom mapping names (e.g. `labels.txt`, `obj.names`) |
+| `yoloInlayHints.showUnlabeledWarning` | `true` | Toggle warning hints for missing class IDs |
+
+---
+
+# 📦 Installation
+
+Install directly from the **VS Code Marketplace**.
+
+1. Open VS Code
+2. Go to **Extensions**
+3. Search for **YOLO Inlay Hints**
+4. Click **Install**
+
+---
+
+# 📁 Usage
+
+1. Open a folder containing YOLO annotation files
+2. Ensure a `classes.txt` (or configured mapping file) exists
+3. Open any annotation `.txt` file
+
+Hints will appear automatically.
+
+---
+
+## Example Dataset
+
+```
+dataset/
+│
+├─ images/
+│   ├─ img1.jpg
+│
+├─ labels/
+│   ├─ img1.txt
+│
+└─ classes.txt
+```
+
+---
+
+# 🧠 Typical Workflow
+
+1. Annotate images using a labeling tool
+2. Open the dataset in VS Code
+3. Instantly visualize class labels inside annotation files
+4. Navigate between labels using **Cmd/Ctrl + Click**
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+If you'd like to improve the extension:
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+---
+
+# 📄 License
+
+MIT License
