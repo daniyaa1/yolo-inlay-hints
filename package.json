@@ -1,6 +1,6 @@
 {
   "name": "yolo-inlay-hints",
-  "publisher": "daniya",
+  "publisher": "daniya-ishteyaque",
   "displayName": "YOLO Inlay Hints",
   "icon": "icon.png",
   "description": "Adds inlay hints for YOLO class IDs using classes.txt",
