@@ -2,6 +2,7 @@
   "name": "yolo-inlay-hints",
   "publisher": "daniya",
   "displayName": "YOLO Inlay Hints",
+  "icon": "icon.png",
   "description": "Adds inlay hints for YOLO class IDs using classes.txt",
   "version": "0.0.1",
   "repository": {
