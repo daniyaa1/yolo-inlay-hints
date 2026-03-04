@@ -1,0 +1,61 @@
+{
+  "name": "yolo-inlay-hints",
+  "publisher": "daniya",
+  "displayName": "YOLO Inlay Hints",
+  "description": "Adds inlay hints for YOLO class IDs using classes.txt",
+  "version": "0.0.1",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/daniyaa1/yolo-inlay-hints.git"
+},
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:plaintext"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "YOLO Inlay Hints",
+      "properties": {
+        "yoloInlayHints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable YOLO class name inlay hints."
+        },
+        "yoloInlayHints.mappingFileName": {
+          "type": "string",
+          "default": "classes.txt",
+          "description": "The name of the file containing class names (e.g., classes.txt or obj.names)."
+        },
+        "yoloInlayHints.showUnlabeledWarning": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a warning hint if a Class ID is not found in the mapping file."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.54.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
