@@ -4,7 +4,7 @@
   "displayName": "YOLO Inlay Hints",
   "icon": "icon.png",
   "description": "Adds inlay hints for YOLO class IDs using classes.txt",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/daniyaa1/yolo-inlay-hints.git"
